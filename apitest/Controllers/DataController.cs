@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using apitest.Models;
@@ -48,6 +49,22 @@ namespace apitest.Controllers
 
             return Arr;
         }
+        [HttpPost("todo")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<TodoItem> Create([FromForm] int id, [FromForm] string name, [FromForm] bool complete)
+        {
+            
+            TodoItem Todo = new TodoItem();
+            Todo.Id = id;
+            Todo.Name = name;
+            Todo.IsComplete = complete;
+            
+
+
+            return Todo;
+        }
+        
     }
 
 }
