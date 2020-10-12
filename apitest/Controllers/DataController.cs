@@ -10,12 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace apitest.Controllers
 {
-    
     [ApiController]
     [Route("[controller]")]
     public class DataController : ControllerBase
-    {
-        
+    { 
 
         [HttpGet]
 
@@ -27,8 +25,8 @@ namespace apitest.Controllers
 
         public TodoItem [] Todo()
         {
-
-            TodoItem [] Arr = new TodoItem[10];
+            List<TodoItem> lista = new List<TodoItem>();
+            TodoItem [] Arr = new TodoItem[100];
 
             //Skapar fake data för nuet.
             if(TodoItem.TodoLista.Count == 0) {
@@ -51,17 +49,10 @@ namespace apitest.Controllers
                 TodoItem.TodoLista.Add(Todo);
 
             }
-            
-            //Arr[2] = Todo2;
-            int i = 0;
-            foreach(TodoItem test in TodoItem.TodoLista)
-            {
-                
-                Arr[i] = test;
-                i++;
-            }
 
-            return Arr;
+                return TodoItem.TodoLista.ToArray();
+            
+            
         }
         [HttpPost("todo")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -69,7 +60,6 @@ namespace apitest.Controllers
         ///<summary> Tar 3 parametrar från formet</summary>
         public ActionResult<TodoItem> Create([FromForm] int id, [FromForm] string name, [FromForm] bool complete)
         {
-
             //Tittar så allt är definerat annars returnrar den 404/Notfound();
             if (id == null || name == null || complete == null) return NotFound();
             //Allt var definerat och ett objekt skapas baserat på inputten
