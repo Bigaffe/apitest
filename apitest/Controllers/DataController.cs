@@ -23,10 +23,8 @@ namespace apitest.Controllers
         }
         [HttpGet("todo")]
 
-        public TodoItem [] Todo()
+        public List<TodoItem>Todo()
         {
-            List<TodoItem> lista = new List<TodoItem>();
-            TodoItem [] Arr = new TodoItem[100];
 
             //Skapar fake data för nuet.
             if(TodoItem.TodoLista.Count == 0) {
@@ -40,17 +38,17 @@ namespace apitest.Controllers
                 Todo1.Id = 13;
                 Todo1.Name = "Learn .net Core";
                 Todo1.IsComplete = false;
-                TodoItem.TodoLista.Add(Todo);
+                TodoItem.TodoLista.Add(Todo1);
 
                 TodoItem Todo2 = new TodoItem();
                 Todo2.Id = 14;
                 Todo2.Name = "Learn API in .net Core";
                 Todo2.IsComplete = true;
-                TodoItem.TodoLista.Add(Todo);
+                TodoItem.TodoLista.Add(Todo2);
 
             }
 
-                return TodoItem.TodoLista.ToArray();
+                return TodoItem.TodoLista;
             
             
         }
